@@ -1,0 +1,40 @@
+package Chat.AllMessage;
+
+message SendMessage
+{
+	enum PersionType
+    {
+        PERSION_TYPE1 = 1;
+        PERSION_TYPE2 = 2;
+    }
+
+
+    repeated StatusResponse status = 1;
+    required ContentMessage content  = 2;
+    optional PersionType type = 3;
+
+    message StatusResponse
+    {
+        required string status = 1;
+        required int32 errorCode = 2;
+    }
+
+    message ContentMessage
+    {
+        required string timeCreate = 1;
+        required string content = 2;
+    }
+
+    extensions 100 to 199;
+    
+}
+message Persion {
+	
+	extend SendMessage 
+	{
+		required Persion persion = 100;	
+	}
+
+	required string userName = 1;
+	optional bytes userAvatar = 2;
+}

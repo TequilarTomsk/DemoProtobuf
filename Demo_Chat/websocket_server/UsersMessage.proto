@@ -1,0 +1,8 @@
+package Chat.Message;
+
+message UsersMessage
+{
+	required int64 userID = 1;
+	required string userName = 2;
+    
+}

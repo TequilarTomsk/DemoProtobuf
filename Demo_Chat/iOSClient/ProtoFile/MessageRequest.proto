@@ -1,0 +1,26 @@
+package Chat.Request;
+
+message RequestMessage
+{
+    
+    required string content = 1;
+    required PersionReceipt perReceipt = 2;
+    required PersionSend perSend = 3;
+
+
+    message PersionReceipt {
+
+        required int32 userID = 1;
+        required string userName = 2;
+        required bytes userAvatar = 3;
+    }
+
+    message PersionSend {
+
+        required int32 userID = 1;
+        required string userName = 2;
+        required bytes userAvatar = 3;
+
+    }
+    
+}

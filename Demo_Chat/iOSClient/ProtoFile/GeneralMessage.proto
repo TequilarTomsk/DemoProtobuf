@@ -1,0 +1,15 @@
+package Chat.Message;
+
+message GeneralMessage
+{
+	enum MessageType
+    {
+        MESSAGE_REQUEST = 1;
+        MESSAGE_REPONSE = 2;
+        MESSAGE_USES = 3;
+    }
+
+    required MessageType msgType = 1;
+    required bytes msgPayload  = 2;
+    
+}

@@ -1,0 +1,46 @@
+package Chat.Response;
+
+message ResponseMessage
+{
+    repeated StatusResponse status = 1;
+    required ContentMessage content  = 2;
+
+    message StatusResponse
+    {
+        required string status = 1;
+        required int32 errorCode = 2;
+    }
+
+    message ContentMessage
+    {
+        required int64 messageID = 1;
+        required string timeCreate = 2;
+        required string content = 3;
+    }
+
+    extensions 100 to 199;
+    
+}
+message PersionSend {
+	
+	extend ResponseMessage 
+	{
+		required PersionSend persionSend = 100;	
+	}
+
+    required int32 userID = 1;
+	required string userName = 2;
+	optional bytes userAvatar = 3;
+}
+
+message PersionReceive {
+    
+    extend ResponseMessage 
+    {
+        required PersionReceive persionReceive = 101; 
+    }
+
+    required int32 userID = 1;
+    required string userName = 2;
+    optional bytes userAvatar = 3;
+}

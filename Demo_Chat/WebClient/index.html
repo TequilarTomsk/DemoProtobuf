@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <style type="text/css">  
+        .dynamicDiv {  
+            width: 500px;  
+            height: 100px;  
+            border: solid 1px #c0c0c0;  
+            background-color: #e1e1e1;  
+            font-size: 11px;  
+            font-family: verdana;  
+            color: #000;  
+            padding: 0px;  
+        }  
+    </style>  
+
+    </head>
+    <body>
+        <input type="text" id="txtMessage" name="txtMessage" /><button onClick="sendClick()"  id="go">Send</button>
+
+        <script type="text/javascript" language="javascript">
+
+    var ws = new WebSocket('ws://localhost:8000');
+        ws.onopen = function () 
+        {
+
+             ws.send("ws:2");
+        };
+
+         ws.onmessage = function(message) {
+
+
+              var localObj = JSON.parse(message.data);
+
+              // alert("Connecting success:"+localObj.content);
+
+              var currentUser = "User 2";
+
+              var imgTag = "<img src ='../websocket/userAvatar.png' width='35' height='35' />"; 
+
+              var perInfo = localObj.timeCreate+" :"+localObj.userName+"  ";
+              var alert = "right";
+
+              if (currentUser == localObj.userName) {
+
+                    perInfo = "  Me: "+localObj.timeCreate;
+                    alert = "left";
+                    imgTag = "<img src ='../websocket/meAvatar.jpeg' width='35' height='35' style = 'float:right' />"; 
+              };
+
+              
+            createDiv(perInfo,localObj.content,alert,imgTag);
+
+         };
+
+        function sendClick()
+        {
+
+            var text = document.getElementById("txtMessage");
+            ws.send(text.value);
+        }
+
+        function createDiv(info,message,alertType,images) { 
+            var divTag = document.createElement("div"); 
+ 
+            divTag.id = "div1"; 
+ 
+            divTag.setAttribute("align",alertType); 
+ 
+            divTag.style.margin = "0px auto"; 
+ 
+            divTag.className = "dynamicDiv"; 
+ 
+            divTag.innerHTML = info+"  <h3>"+message+"</h3>"; 
+ 
+            document.body.appendChild(divTag); 
+        } 
+        // document.getElementById('go').onclick = sendClick;
+
+        </script>
+    </body>
+
+
+</html>
