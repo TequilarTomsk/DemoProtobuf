@@ -152,7 +152,9 @@ int32_t computeFixed32SizeNoTag(int32_t value) {
 
 
 int32_t computeBoolSizeNoTag(BOOL value) {
+    
 	return 1;
+    
 }
 
 
